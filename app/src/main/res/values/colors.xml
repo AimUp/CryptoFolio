@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#E0E0E0</color>
+    <color name="colorAccentLight">#757575</color>
+    <color name="separatorLight">#F5F5F5</color>
+    <color name="separator">#424242</color>
+    <color name="backgroundDark">#212121</color>
+    <color name="line">#212121</color>
+    <color name="Background">#FF303030</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="graphLine">#FF303F9F</color>
+    <color name="grapFill">#aaffffff</color>
+</resources>

@@ -1,0 +1,27 @@
+<resources>
+
+    <style name="splash" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/Background</item>
+        <item name="colorPrimaryDark">@color/Background</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:colorBackground">@color/Background</item>
+    </style>
+
+    <style name="GeneralTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="tabTrasparent" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:itemBackground">@color/Background</item>
+    </style>
+
+</resources>

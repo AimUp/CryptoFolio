@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation= "vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.aimarugarte.measurelogger.MainActivity">
+
+    <ImageView
+        android:id="@+id/splashscreen"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:src="@drawable/iconoapp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="135dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@+id/splashscreen"
+        android:layout_alignParentStart="true">
+        <TextView
+            android:id="@+id/splashtitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Title1"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/splashtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Title2"
+            android:fontFamily="casual"
+            android:textSize="50sp"
+            android:layout_alignBaseline="@+id/splashtitle1"
+            android:layout_alignBottom="@+id/splashtitle1"
+            android:layout_toEndOf="@+id/splashtitle1" />
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

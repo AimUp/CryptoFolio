@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:chart="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/SwipeRefreshLayout">
+
+    <TableLayout
+        android:id="@+id/containerCoins"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.db.chart.view.LineChartView
+            android:id="@+id/linechart"
+            android:layout_width="match_parent"
+            android:layout_height="310dp"/>
+
+        <TextView
+            android:id="@+id/Bitcoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bitcoin"
+            android:textAlignment="center"
+            android:textSize="15pt" />
+
+        <TextView
+            android:id="@+id/btcPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_0"
+            android:textAlignment="center"
+            android:textSize="15pt" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="3dp"
+            android:background="@color/separator" />
+
+        <TextView
+            android:id="@+id/Ethereum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ethereum"
+            android:textAlignment="center"
+            android:textSize="15pt" />
+
+        <TextView
+            android:id="@+id/ethPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_0"
+            android:textAlignment="center"
+            android:textSize="15pt" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="3dp"
+            android:background="@color/separator" />
+
+        <TextView
+            android:id="@+id/Litecoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/litecoin"
+            android:textAlignment="center"
+            android:textSize="15pt" />
+
+        <TextView
+            android:id="@+id/ltcPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_0"
+            android:textAlignment="center"
+            android:textSize="15pt" />
+    </TableLayout>
+</android.support.v4.widget.SwipeRefreshLayout>
