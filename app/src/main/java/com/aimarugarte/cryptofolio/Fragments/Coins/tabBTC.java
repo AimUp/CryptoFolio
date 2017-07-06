@@ -1,4 +1,4 @@
-package com.aimarugarte.measurelogger.Fragments.Coins;
+package com.aimarugarte.cryptofolio.Fragments.Coins;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.aimarugarte.measurelogger.Main2Activity;
-import com.aimarugarte.measurelogger.R;
+import com.aimarugarte.cryptofolio.Main2Activity;
+import com.aimarugarte.cryptofolio.R;
 
 public class tabBTC extends Fragment implements View.OnClickListener {
 

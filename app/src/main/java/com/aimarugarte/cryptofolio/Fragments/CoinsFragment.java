@@ -1,4 +1,4 @@
-package com.aimarugarte.measurelogger.Fragments;
+package com.aimarugarte.cryptofolio.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,9 +18,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.aimarugarte.measurelogger.Fragments.Coins.SwipeFrames;
-import com.aimarugarte.measurelogger.Main2Activity;
-import com.aimarugarte.measurelogger.R;
+import com.aimarugarte.cryptofolio.Fragments.Coins.SwipeFrames;
+import com.aimarugarte.cryptofolio.Main2Activity;
+import com.aimarugarte.cryptofolio.R;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -1,4 +1,4 @@
-package com.aimarugarte.measurelogger;
+package com.aimarugarte.cryptofolio;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -12,9 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.aimarugarte.measurelogger.Fragments.CoinsFragment;
-import com.aimarugarte.measurelogger.Fragments.HomeFragment;
-import com.aimarugarte.measurelogger.Fragments.BalanceFragment;
+import com.aimarugarte.cryptofolio.Fragments.CoinsFragment;
+import com.aimarugarte.cryptofolio.Fragments.HomeFragment;
+import com.aimarugarte.cryptofolio.Fragments.BalanceFragment;
 
 public class Main2Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

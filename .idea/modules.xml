@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MeasureLogger.iml" filepath="$PROJECT_DIR$/MeasureLogger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Cryptofolio.iml" filepath="$PROJECT_DIR$/Cryptofolio.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

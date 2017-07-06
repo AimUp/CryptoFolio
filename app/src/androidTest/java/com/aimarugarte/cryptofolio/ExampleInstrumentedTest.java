@@ -1,4 +1,4 @@
-package com.aimarugarte.measurelogger;
+package com.aimarugarte.cryptofolio;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.aimarugarte.measurelogger", appContext.getPackageName());
+        assertEquals("com.aimarugarte.cryptofolio", appContext.getPackageName());
     }
 }

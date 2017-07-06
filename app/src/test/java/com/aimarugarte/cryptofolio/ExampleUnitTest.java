@@ -1,4 +1,4 @@
-package com.aimarugarte.measurelogger;
+package com.aimarugarte.cryptofolio;
 
 import org.junit.Test;
 

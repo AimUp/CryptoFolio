@@ -1,4 +1,4 @@
-package com.aimarugarte.measurelogger.Fragments;
+package com.aimarugarte.cryptofolio.Fragments;
 
 /**
  * Created by AIMAR on 14/6/17.
@@ -9,12 +9,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.aimarugarte.measurelogger.Main2Activity;
-import com.aimarugarte.measurelogger.MainActivity;
-import com.aimarugarte.measurelogger.R;
+import com.aimarugarte.cryptofolio.Main2Activity;
+import com.aimarugarte.cryptofolio.R;
 
 public class BalanceFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package com.aimarugarte.measurelogger.Fragments.Coins;
+package com.aimarugarte.cryptofolio.Fragments.Coins;
 
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,7 @@ import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.aimarugarte.measurelogger.R;
+import com.aimarugarte.cryptofolio.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,7 +4,7 @@
     android:orientation= "vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context="com.aimarugarte.measurelogger.MainActivity">
+    tools:context="com.aimarugarte.cryptofolio.MainActivity">
 
     <ImageView
         android:id="@+id/splashscreen"

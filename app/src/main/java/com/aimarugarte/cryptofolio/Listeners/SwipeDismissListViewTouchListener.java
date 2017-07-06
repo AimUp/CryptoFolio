@@ -1,4 +1,4 @@
-package com.aimarugarte.measurelogger.Listeners;
+package com.aimarugarte.cryptofolio.Listeners;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

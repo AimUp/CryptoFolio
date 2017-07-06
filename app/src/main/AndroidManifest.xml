@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.aimarugarte.measurelogger">
+    package="com.aimarugarte.cryptofolio">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name=".MainActivity"
+            android:name="com.aimarugarte.cryptofolio.MainActivity"
             android:theme="@style/splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,12 +21,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Main2Activity"
+            android:name="com.aimarugarte.cryptofolio.Main2Activity"
             android:label="@string/title_activity_main2"
             android:theme="@style/GeneralTheme">
         </activity>
         <activity
-            android:name=".Fragments.Coins.SwipeFrames"
+            android:name="com.aimarugarte.cryptofolio.Fragments.Coins.SwipeFrames"
             android:theme="@style/tabTrasparent">
         </activity>
     </application>
