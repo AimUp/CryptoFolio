@@ -141,4 +141,16 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     public void addCoinToCoinFragment(String coin, String cuantity, String site){
         coinsFragment.addACoin(coin, cuantity, site);
     }
+
+    public float getBitcoinPrice(){
+        return homeFragment.getBitcoin();
+    }
+
+    public float getEthereumPrice(){
+        return homeFragment.getEthereum();
+    }
+
+    public float getLitecoinPrice(){
+        return homeFragment.getLitecoin();
+    }
 }

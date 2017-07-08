@@ -29,6 +29,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -39,13 +40,14 @@ public class CoinsFragment extends Fragment implements View.OnTouchListener, Swi
     private String dataFilename = "coinsDataFile";
     private int downX;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private View view;
 
     //TODO txanpon gehiegi daudenean ezin dira ezabatu scrollView-arengaitik
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_coins, container, false);
+        view = inflater.inflate(R.layout.fragment_coins, container, false);
         ((Main2Activity) getActivity()).getSupportActionBar().setTitle("Coins");
 
         FloatingActionButton addButton = (FloatingActionButton) view.findViewById(R.id.addButton);
@@ -74,13 +76,49 @@ public class CoinsFragment extends Fragment implements View.OnTouchListener, Swi
             readCoinData();
         }
 
+        loadPrices();
+
         return view;
+    }
+
+    private void loadPrices(){
+        float total = 0;
+        LinearLayout laux;
+        for(int i=0; i<ll.getChildCount(); i++){
+            laux = (LinearLayout) ll.getChildAt(i);
+            TextView taux1 = (TextView) laux.getChildAt(0);
+            StringTokenizer tokens = new StringTokenizer(taux1.getText().toString(), " ");
+            String quantity = tokens.nextToken();
+            String coin = tokens.nextToken();
+            TextView taux2 = (TextView) laux.getChildAt(1);
+            float coinTotal = 0;
+            coinTotal = calculatePrice(coin, Float.parseFloat(quantity));
+            total += coinTotal;
+            String text2 = "coinbase " + coinTotal +"€";
+            taux2.setText(text2);
+        }
+        TextView totalTV = (TextView) view.findViewById(R.id.totalCoinsValue);
+        totalTV.setText(round(total) + "€");
+    }
+
+    private float calculatePrice(String coin, float quantity){
+        float coinTotal = 0;
+        switch (coin){
+            case "BTC": coinTotal = Main2Activity.getMyMain2().getBitcoinPrice()*quantity;
+                break;
+            case "ETH": coinTotal = Main2Activity.getMyMain2().getEthereumPrice()*quantity;
+                break;
+            case "LTC": coinTotal = Main2Activity.getMyMain2().getLitecoinPrice()*quantity;
+                break;
+        }
+        return round(coinTotal);
     }
 
     @Override
     public void onRefresh() {
-        //TODO
+        loadPrices();
         swipeRefreshLayout.setRefreshing(false);
+
     }
 
     @Override
@@ -115,7 +153,7 @@ public class CoinsFragment extends Fragment implements View.OnTouchListener, Swi
         addCoinInternally(number ,coin, cuantity, site);
     }
 
-    private void addCoin(String number, String coin, String cuantity, String site){
+    private void addCoin(String number, String coin, String quantity, String site){
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         params.setMargins(0, Math.round(dpToPixel(-2)), 0, 0);
@@ -132,19 +170,22 @@ public class CoinsFragment extends Fragment implements View.OnTouchListener, Swi
         t1.setGravity(Gravity.CENTER);
         t1.setTextSize(30);
         t1.setTextColor(getResources().getColor(R.color.Background));
-        String text1 = cuantity+ " " + coin;
+        String text1 = quantity+ " " + coin;
         t1.setText(text1);
 
         TextView t2 = new TextView(getContext());
         t2.setGravity(Gravity.CENTER);
         t2.setTextSize(15);
         t2.setTextColor(getResources().getColor(R.color.Background));
-        String text2 = site + " 0€";
+        float eurPrice = calculatePrice(coin, Float.parseFloat(quantity));
+        String text2 = site + " " + eurPrice + "€";
         t2.setText(text2);
 
         l1.addView(t1);
         l1.addView(t2);
         ll.addView(l1,params);
+
+        loadPrices();
     }
 
     private void addCoinInternally(String number, String coin, String cuantity, String site){
@@ -179,6 +220,7 @@ public class CoinsFragment extends Fragment implements View.OnTouchListener, Swi
     private void deleteCoin(View view){
         LinearLayout parent = (LinearLayout) view.getParent();
         parent.removeView(view);
+        loadPrices();
     }
 
     private void deleteCoinInternally(int number) throws IOException {
@@ -225,6 +267,11 @@ public class CoinsFragment extends Fragment implements View.OnTouchListener, Swi
             e.printStackTrace();
         }
         return lines;
+    }
+
+    private float round(float number){
+        DecimalFormat df = new DecimalFormat("#.##");
+        return Float.parseFloat(df.format(number));
     }
 
     private float dpToPixel(int dp){

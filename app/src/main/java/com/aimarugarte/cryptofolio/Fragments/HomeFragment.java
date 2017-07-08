@@ -29,7 +29,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.StringTokenizer;
 
 public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
@@ -43,9 +45,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     ProgressDialog pd;
     View view;
 
-    final String BTCChartData = "http://api2.coindesk.com/charts/data?output=csv&data=close&index=USD&startdate=2016-07-06&enddate=2017-07-06&exchanges=bpi&dev=1";
-    final String ETHChartData = "http://api.coindesk.com/charts/data?output=csv&data=close&index=ETH&startdate=2016-07-06&enddate=2017-07-06&exchanges=bpi&dev=1";
-
+    String BTCChartData;
+    String ETHChartData;
     String[] st;
     float[] ft;
 
@@ -69,9 +70,30 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         pd.setMessage("Please wait");
         pd.setCancelable(true);
         loadPrice();
+
+        Date cDate = new Date();
+        String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
+        BTCChartData = "http://api.coindesk.com/charts/data?output=csv&data=close&index=USD&startdate=2016-07-06&enddate="+fDate+"&exchanges=bpi&dev=1";
+        ETHChartData = "http://api.coindesk.com/charts/data?output=csv&data=close&index=ETH&startdate=2016-07-06&enddate="+fDate+"&exchanges=bpi&dev=1";
+
         new CsvTask().execute(BTCChartData);
 
         return view;
+    }
+
+    public float getBitcoin(){
+        String price = btcText.getText().toString();
+        return Float.parseFloat(price.substring(0, price.length() - 1));
+    }
+
+    public float getEthereum(){
+        String price = ethText.getText().toString();
+        return Float.parseFloat(price.substring(0, price.length() - 1));
+    }
+
+    public float getLitecoin(){
+        String price = ltcText.getText().toString();
+        return Float.parseFloat(price.substring(0, price.length() - 1));
     }
 
     private void loadPrice(){
@@ -248,6 +270,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             for (Float f : arrayFloat) {
                 ft[i++] = (f != null ? f : Float.NaN); // Or whatever default you want.
             }
+
 
             LineSet dataset = new LineSet(st,ft);
             dataset.setColor(ResourcesCompat.getColor(getResources(), R.color.white, null));
