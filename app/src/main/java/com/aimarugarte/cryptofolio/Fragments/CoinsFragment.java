@@ -1,6 +1,5 @@
 package com.aimarugarte.cryptofolio.Fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -8,17 +7,17 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aimarugarte.cryptofolio.Fragments.Coins.SwipeFrames;
+import com.aimarugarte.cryptofolio.Listeners.OnSwipeTouchListener;
 import com.aimarugarte.cryptofolio.Main2Activity;
 import com.aimarugarte.cryptofolio.R;
 
@@ -34,11 +33,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class CoinsFragment extends Fragment implements View.OnTouchListener, SwipeRefreshLayout.OnRefreshListener{
+public class CoinsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private LinearLayout ll;
     private String dataFilename = "coinsDataFile";
-    private int downX;
     private SwipeRefreshLayout swipeRefreshLayout;
     private View view;
 
@@ -81,72 +79,13 @@ public class CoinsFragment extends Fragment implements View.OnTouchListener, Swi
         return view;
     }
 
-    private void loadPrices(){
-        float total = 0;
-        LinearLayout laux;
-        for(int i=0; i<ll.getChildCount(); i++){
-            laux = (LinearLayout) ll.getChildAt(i);
-            TextView taux1 = (TextView) laux.getChildAt(0);
-            StringTokenizer tokens = new StringTokenizer(taux1.getText().toString(), " ");
-            String quantity = tokens.nextToken();
-            String coin = tokens.nextToken();
-            TextView taux2 = (TextView) laux.getChildAt(1);
-            float coinTotal = 0;
-            coinTotal = calculatePrice(coin, Float.parseFloat(quantity));
-            total += coinTotal;
-            String text2 = "coinbase " + coinTotal +"€";
-            taux2.setText(text2);
-        }
-        TextView totalTV = (TextView) view.findViewById(R.id.totalCoinsValue);
-        totalTV.setText(round(total) + "€");
-    }
-
-    private float calculatePrice(String coin, float quantity){
-        float coinTotal = 0;
-        switch (coin){
-            case "BTC": coinTotal = Main2Activity.getMyMain2().getBitcoinPrice()*quantity;
-                break;
-            case "ETH": coinTotal = Main2Activity.getMyMain2().getEthereumPrice()*quantity;
-                break;
-            case "LTC": coinTotal = Main2Activity.getMyMain2().getLitecoinPrice()*quantity;
-                break;
-        }
-        return round(coinTotal);
-    }
-
     @Override
     public void onRefresh() {
         loadPrices();
         swipeRefreshLayout.setRefreshing(false);
-
     }
 
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        int upX;
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        ((Activity)view.getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int width = displayMetrics.widthPixels;
-        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-            downX = (int) motionEvent.getX();
-            return true;
-        }
-        else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-            upX = (int) motionEvent.getX();
-            if (downX - upX > width/3) {   //left swipe
-                try {
-                    deleteCoinInternally(Integer.parseInt((String) view.getTag()));
-                    deleteCoin(view);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
+    //ADDING COINS
     public void addACoin(String coin, String cuantity, String site){
         String number = String.valueOf(fileLines(dataFilename));
         addCoin(number ,coin, cuantity, site);
@@ -164,7 +103,7 @@ public class CoinsFragment extends Fragment implements View.OnTouchListener, Swi
         int p = Math.round(dpToPixel(10));
         l1.setPadding(p,p,p,p);
         l1.setTag(number);
-        l1.setOnTouchListener(this);
+        l1.setOnTouchListener(new OnSwipeTouchListener(getContext()));
 
         TextView t1 = new TextView(getContext());
         t1.setGravity(Gravity.CENTER);
@@ -200,19 +139,12 @@ public class CoinsFragment extends Fragment implements View.OnTouchListener, Swi
         }
     }
 
-    private void readCoinData(){
-        FileInputStream inputStream;
+    //DELETING COINS
+    public void deleteAcoin(View v){
         try {
-            inputStream = getContext().getApplicationContext().openFileInput(dataFilename);
-            InputStreamReader isr = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(isr);
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                StringTokenizer tokens = new StringTokenizer(line, "|");
-                addCoin(tokens.nextToken(), tokens.nextToken(), tokens.nextToken(), tokens.nextToken());
-            }
-            inputStream.close();
-        } catch (Exception e) {
+            deleteCoin(v);
+            deleteCoinInternally((String) v.getTag());
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -223,7 +155,7 @@ public class CoinsFragment extends Fragment implements View.OnTouchListener, Swi
         loadPrices();
     }
 
-    private void deleteCoinInternally(int number) throws IOException {
+    private void deleteCoinInternally(String number) throws IOException {
         List<String> lines = new LinkedList<>();
         FileInputStream inputStream;
         FileOutputStream outputStream;
@@ -231,13 +163,12 @@ public class CoinsFragment extends Fragment implements View.OnTouchListener, Swi
             inputStream = getContext().getApplicationContext().openFileInput(dataFilename);
             InputStreamReader isr = new InputStreamReader(inputStream);
             BufferedReader bufferedReader = new BufferedReader(isr);
-            int count = 0;
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                if (number!=count){
+                StringTokenizer tokens = new StringTokenizer(line, "|");
+                if (!tokens.nextToken().equals(number)){
                     lines.add(line);
                 }
-                count++;
             }
             inputStream.close();
 
@@ -256,6 +187,60 @@ public class CoinsFragment extends Fragment implements View.OnTouchListener, Swi
         }
     }
 
+
+    //LOADING COINS
+    private void readCoinData(){
+        FileInputStream inputStream;
+        try {
+            inputStream = getContext().getApplicationContext().openFileInput(dataFilename);
+            InputStreamReader isr = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(isr);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
+                StringTokenizer tokens = new StringTokenizer(line, "|");
+                addCoin(tokens.nextToken(), tokens.nextToken(), tokens.nextToken(), tokens.nextToken());
+            }
+            inputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadPrices(){
+        float total = 0;
+        LinearLayout laux;
+        for(int i=0; i<ll.getChildCount(); i++){
+            laux = (LinearLayout) ll.getChildAt(i);
+            TextView taux1 = (TextView) laux.getChildAt(0);
+            StringTokenizer tokens = new StringTokenizer(taux1.getText().toString(), " ");
+            String quantity = tokens.nextToken();
+            String coin = tokens.nextToken();
+            TextView taux2 = (TextView) laux.getChildAt(1);
+            float coinTotal = 0;
+            coinTotal = calculatePrice(coin, Float.parseFloat(quantity));
+            total += coinTotal;
+            String text2 = "coinbase " + coinTotal +"€";
+            taux2.setText(text2);
+        }
+        TextView totalTV = (TextView) view.findViewById(R.id.totalCoinsValue);
+        totalTV.setText(round(total) + "€");
+    }
+
+    private float calculatePrice(String coin, float quantity){
+        float coinTotal = 0;
+        switch (coin){
+            case "BTC": coinTotal = Main2Activity.getMyMain2().getBitcoinPrice()*quantity;
+                break;
+            case "ETH": coinTotal = Main2Activity.getMyMain2().getEthereumPrice()*quantity;
+                break;
+            case "LTC": coinTotal = Main2Activity.getMyMain2().getLitecoinPrice()*quantity;
+                break;
+        }
+        return round(coinTotal);
+    }
+
+    //HELPING METHODS
     private int fileLines(String filename){
         int lines = 0;
         try{

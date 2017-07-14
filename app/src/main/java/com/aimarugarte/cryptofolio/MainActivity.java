@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity{
         Typeface tf = Typeface.createFromAsset(getAssets(), "DitR.ttf");
         t.setTypeface(tf);*/
 
-        Main2Activity m2 = Main2Activity.getMyMain2();
-
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {

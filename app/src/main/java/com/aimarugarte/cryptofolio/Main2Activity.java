@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.aimarugarte.cryptofolio.Fragments.CoinsFragment;
 import com.aimarugarte.cryptofolio.Fragments.HomeFragment;
@@ -26,7 +27,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     public static Main2Activity getMyMain2(){
         if(myMain2==null){
             myMain2 = new Main2Activity();
-            System.out.println("main null");
         }
         return myMain2;
     }
@@ -89,7 +89,6 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -140,6 +139,10 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
     public void addCoinToCoinFragment(String coin, String cuantity, String site){
         coinsFragment.addACoin(coin, cuantity, site);
+    }
+
+    public void deleteCoinFromCoinFragment(View v){
+        coinsFragment.deleteAcoin(v);
     }
 
     public float getBitcoinPrice(){

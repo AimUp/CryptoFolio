@@ -13,10 +13,41 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="20dp">
+            <TableRow
+                android:gravity="center">
+                <TextView
+                    android:gravity="center_vertical|center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textStyle="bold"
+                    android:text="BTC"
+                    android:id="@+id/textView" />
+                <Switch
+                    android:id="@+id/switch1"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:textOff="ETH"
+                    android:textOn="BTC" />
+                <TextView
+                    android:gravity="center_vertical|center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textStyle="bold"
+                    android:text="ETH"
+                    android:layout_below="@+id/textView" />
+            </TableRow>
+        </TableLayout>
+
         <com.db.chart.view.LineChartView
             android:id="@+id/linechart"
             android:layout_width="match_parent"
-            android:layout_height="310dp"/>
+            android:layout_height="300dp"/>
 
         <TextView
             android:id="@+id/Bitcoin"
