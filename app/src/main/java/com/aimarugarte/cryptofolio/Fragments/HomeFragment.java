@@ -10,6 +10,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.aimarugarte.cryptofolio.Main2Activity;
@@ -63,8 +65,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.SwipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        lchart = (LineChartView) view.findViewById(R.id.linechart);
-
         //TODO comprobar conexion para que no crashee cuando no hay
         pd = new ProgressDialog(getActivity());
         pd.setMessage("Please wait");
@@ -76,7 +76,26 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         BTCChartData = "http://api.coindesk.com/charts/data?output=csv&data=close&index=USD&startdate=2016-07-06&enddate="+fDate+"&exchanges=bpi&dev=1";
         ETHChartData = "http://api.coindesk.com/charts/data?output=csv&data=close&index=ETH&startdate=2016-07-06&enddate="+fDate+"&exchanges=bpi&dev=1";
 
+        lchart = (LineChartView) view.findViewById(R.id.linechartBTC);
         new CsvTask().execute(BTCChartData);
+
+        Switch homeSwitch = (Switch) view.findViewById(R.id.homeSwitch);
+        homeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    lchart.setVisibility(View.GONE);
+                    lchart = (LineChartView) view.findViewById(R.id.linechartETH);
+                    new CsvTask().execute(ETHChartData);
+                    lchart.setVisibility(View.VISIBLE);
+                }
+                else{
+                    lchart.setVisibility(View.GONE);
+                    lchart = (LineChartView) view.findViewById(R.id.linechartBTC);
+                    lchart.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         return view;
     }
@@ -270,7 +289,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             for (Float f : arrayFloat) {
                 ft[i++] = (f != null ? f : Float.NaN); // Or whatever default you want.
             }
-
 
             LineSet dataset = new LineSet(st,ft);
             dataset.setColor(ResourcesCompat.getColor(getResources(), R.color.white, null));

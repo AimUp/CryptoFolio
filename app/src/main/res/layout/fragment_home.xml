@@ -26,14 +26,16 @@
                     android:text="BTC"
                     android:id="@+id/textView" />
                 <Switch
-                    android:id="@+id/switch1"
+                    android:id="@+id/homeSwitch"
                     android:layout_marginLeft="1dp"
                     android:layout_marginRight="1dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:textOff="ETH"
-                    android:textOn="BTC" />
+                    android:textOn="BTC"
+
+                    android:thumbTint="@color/white"/>
                 <TextView
                     android:gravity="center_vertical|center"
                     android:layout_width="wrap_content"
@@ -45,9 +47,15 @@
         </TableLayout>
 
         <com.db.chart.view.LineChartView
-            android:id="@+id/linechart"
+            android:id="@+id/linechartBTC"
             android:layout_width="match_parent"
             android:layout_height="300dp"/>
+
+        <com.db.chart.view.LineChartView
+            android:id="@+id/linechartETH"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/Bitcoin"

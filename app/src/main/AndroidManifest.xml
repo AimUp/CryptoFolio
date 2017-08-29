@@ -13,21 +13,23 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
             android:name="com.aimarugarte.cryptofolio.MainActivity"
-            android:theme="@style/splash">
+            android:theme="@style/splash"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.aimarugarte.cryptofolio.Main2Activity"
             android:label="@string/title_activity_main2"
-            android:theme="@style/GeneralTheme">
+            android:theme="@style/GeneralTheme"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.aimarugarte.cryptofolio.Fragments.Coins.SwipeFrames"
-            android:theme="@style/tabTrasparent">
+            android:theme="@style/tabTrasparent"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
