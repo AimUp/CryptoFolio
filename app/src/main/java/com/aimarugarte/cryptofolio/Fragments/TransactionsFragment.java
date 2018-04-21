@@ -12,7 +12,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -29,23 +28,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class CoinsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class TransactionsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private LinearLayout ll;
     private String dataFilename = "coinsDataFile";
     private SwipeRefreshLayout swipeRefreshLayout;
     private View view;
 
-    //TODO txanpon gehiegi daudenean ezin dira ezabatu scrollView-arengaitik
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_coins, container, false);
+        view = inflater.inflate(R.layout.fragment_transactions, container, false);
         ((Main2Activity) getActivity()).getSupportActionBar().setTitle("Coins");
 
         FloatingActionButton addButton = (FloatingActionButton) view.findViewById(R.id.addButton);
@@ -131,7 +130,10 @@ public class CoinsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         FileOutputStream outputStream;
         try {
             outputStream = getContext().getApplicationContext().openFileOutput(dataFilename, Context.MODE_APPEND);
-            String string =  number + "|" + coin + "|" + cuantity + "|" + site + "\n";
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+            String date = sdf.format(Calendar.getInstance().getTime());
+            //System.out.println(date);
+            String string =  number + "|" + coin + "|" + cuantity + "|" + site + "|" + date + "\n";
             outputStream.write(string.getBytes());
             outputStream.close();
         } catch (Exception e) {
@@ -197,7 +199,7 @@ public class CoinsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
             BufferedReader bufferedReader = new BufferedReader(isr);
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
+               //System.out.pfrintln(line);
                 StringTokenizer tokens = new StringTokenizer(line, "|");
                 addCoin(tokens.nextToken(), tokens.nextToken(), tokens.nextToken(), tokens.nextToken());
             }

@@ -13,13 +13,13 @@ import android.view.ViewGroup;
 import com.aimarugarte.cryptofolio.Main2Activity;
 import com.aimarugarte.cryptofolio.R;
 
-public class BalanceFragment extends Fragment {
+public class SettingsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_balance, container, false);
-        ((Main2Activity) getActivity()).getSupportActionBar().setTitle("Balance");
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        ((Main2Activity) getActivity()).getSupportActionBar().setTitle("Settings");
 
 
         return view;

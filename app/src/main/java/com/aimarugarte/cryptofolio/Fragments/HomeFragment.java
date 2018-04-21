@@ -21,6 +21,7 @@ import com.db.chart.model.LineSet;
 import com.db.chart.renderer.AxisRenderer;
 import com.db.chart.view.LineChartView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,6 +32,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,6 +49,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     ProgressDialog pd;
     View view;
 
+    boolean ethCharCreated;
     String BTCChartData;
     String ETHChartData;
     String[] st;
@@ -79,6 +82,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         lchart = (LineChartView) view.findViewById(R.id.linechartBTC);
         new CsvTask().execute(BTCChartData);
 
+        ethCharCreated = false;
+
         Switch homeSwitch = (Switch) view.findViewById(R.id.homeSwitch);
         homeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -86,7 +91,10 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 if(b){
                     lchart.setVisibility(View.GONE);
                     lchart = (LineChartView) view.findViewById(R.id.linechartETH);
-                    new CsvTask().execute(ETHChartData);
+                    if(!ethCharCreated){
+                        ethCharCreated = true;
+                        new CsvTask().execute(ETHChartData);
+                    }
                     lchart.setVisibility(View.VISIBLE);
                 }
                 else{
@@ -121,9 +129,9 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     private void actualizePrize(){
-        new JsonTask().execute("BTC","EUR");
-        new JsonTask().execute("ETH","EUR");
-        new JsonTask().execute("LTC","EUR");
+        new JsonTask().execute("bitcoin","eur");
+        new JsonTask().execute("ethereum","eur");
+        new JsonTask().execute("litecoin","eur");
     }
 
     @Override
@@ -149,7 +157,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     private class JsonTask extends AsyncTask<String, String, String> {
         HttpURLConnection urlConnection;
-
+        String currency;
         String coin;
 
         @Override
@@ -160,10 +168,11 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         @Override
         protected String doInBackground(String... args) {
             coin = args[0];
+            currency = args[1];
 
             StringBuilder result = new StringBuilder();
             try {
-                URL url = new URL("https://api.coinbase.com/v2/prices/"+args[0]+"-"+args[1]+"/sell");
+                URL url = new URL("https://api.coinmarketcap.com/v1/ticker/"+args[0]+"/?convert="+args[1]);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
 
@@ -186,21 +195,20 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         @Override
         protected void onPostExecute(String result) {
             JSONObject jObject;
+            JSONArray jArray;
             try {
-                jObject = new JSONObject(result);
-                String aJsonString = jObject.getString("data");
-                jObject = new JSONObject(aJsonString);
-
-                String amount = jObject.getString("amount");
-                amount= amount + "€";
+                jArray = new JSONArray(result);
+                jObject = jArray.getJSONObject(0);
+                String amount = jObject.getString("price_"+currency);
+                amount = round(Float.parseFloat(amount)).toString() + "€";
                 switch (coin){
-                    case "BTC":
+                    case "bitcoin":
                         btcText.setText(amount);
                         break;
-                    case "ETH":
+                    case "ethereum":
                         ethText.setText(amount);
                         break;
-                    case "LTC":
+                    case "litecoin":
                         ltcText.setText(amount);
                         if (pd.isShowing()){
                             pd.dismiss();
@@ -306,5 +314,10 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             Animation anim = new Animation(1000);
             lchart.show(anim);
         }
+    }
+
+    private Float round(Float number){
+        DecimalFormat df = new DecimalFormat("#.##");
+        return Float.parseFloat(df.format(number));
     }
 }

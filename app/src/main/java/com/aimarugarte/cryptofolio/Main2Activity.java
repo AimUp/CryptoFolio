@@ -13,16 +13,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.aimarugarte.cryptofolio.Fragments.CoinsFragment;
+import com.aimarugarte.cryptofolio.Fragments.TransactionsFragment;
 import com.aimarugarte.cryptofolio.Fragments.HomeFragment;
 import com.aimarugarte.cryptofolio.Fragments.BalanceFragment;
+import com.aimarugarte.cryptofolio.Fragments.SettingsFragment;
 
 public class Main2Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static Main2Activity myMain2;
     private HomeFragment homeFragment;
-    private CoinsFragment coinsFragment;
+    private TransactionsFragment transactionsFragment;
     private BalanceFragment measuresFragment;
+    private SettingsFragment settingsFragment;
 
     public static Main2Activity getMyMain2(){
         if(myMain2==null){
@@ -38,8 +40,9 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
         myMain2 = this;
         homeFragment = new HomeFragment();
-        coinsFragment = new CoinsFragment();
+        transactionsFragment = new TransactionsFragment();
         measuresFragment = new BalanceFragment();
+        settingsFragment = new SettingsFragment();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -101,7 +104,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         } else if (id == R.id.nav_measures) {
             setFragment(2);
         } else if (id == R.id.nav_settings) {
-            //TODO
+            setFragment(3);
         } else if (id == R.id.nav_support) {
             //TODO
         } else if (id == R.id.nav_about){
@@ -125,7 +128,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             case 1:
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment, coinsFragment);
+                fragmentTransaction.replace(R.id.fragment, transactionsFragment);
                 fragmentTransaction.commit();
                 break;
             case 2:
@@ -134,15 +137,21 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                 fragmentTransaction.replace(R.id.fragment, measuresFragment);
                 fragmentTransaction.commit();
                 break;
+            case 3:
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, settingsFragment);
+                fragmentTransaction.commit();
+                break;
         }
     }
 
     public void addCoinToCoinFragment(String coin, String cuantity, String site){
-        coinsFragment.addACoin(coin, cuantity, site);
+        transactionsFragment.addACoin(coin, cuantity, site);
     }
 
     public void deleteCoinFromCoinFragment(View v){
-        coinsFragment.deleteAcoin(v);
+        transactionsFragment.deleteAcoin(v);
     }
 
     public float getBitcoinPrice(){

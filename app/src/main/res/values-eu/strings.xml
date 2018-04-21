@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cryptofolio</string>
+    <string name="about">Niri buruz</string>
+    <string name="chart">grafikoa</string>
+    <string name="home">Hasiera</string>
+    <string name="my_coins">Nire txanponak</string>
+</resources>
