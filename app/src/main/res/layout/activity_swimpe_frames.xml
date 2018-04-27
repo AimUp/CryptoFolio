@@ -8,14 +8,14 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     tools:context=".Main2Activity"
-    android:background="@drawable/border">
+    android:background="@drawable/border_swipe">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppBarOverlay"
-        android:background="@drawable/border">
+        android:background="@drawable/border_swipe">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"

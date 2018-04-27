@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Cryptofolio</string>
     <string name="about">Niri buruz</string>
     <string name="chart">grafikoa</string>
     <string name="home">Hasiera</string>
-    <string name="my_coins">Nire txanponak</string>
+    <string name="quantity">Kantitatea</string>
+    <string name="paid">Ordaindua(USD)</string>
+    <string name="transactions">Transakzioak</string>
+    <string name="settings">Ezarpenak</string>
+    <string name="balance">Balantzea</string>
+    <string name="support">Laguntza</string>
+    <string name="support_txt">Galdera edo iradokizunik izatekotan imprimakia erabiliz bidali dezakezu.</string>
+    <string name="edt_feedback">Idatzi zure iradokizuna</string>
+    <string name="btn_feedback">Bidali iradokizuna</string>
 </resources>

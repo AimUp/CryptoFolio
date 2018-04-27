@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.aimarugarte.cryptofolio.Fragments.AboutFragment;
+import com.aimarugarte.cryptofolio.Fragments.SupportFragment;
 import com.aimarugarte.cryptofolio.Fragments.TransactionsFragment;
 import com.aimarugarte.cryptofolio.Fragments.HomeFragment;
 import com.aimarugarte.cryptofolio.Fragments.BalanceFragment;
@@ -25,6 +27,8 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     private TransactionsFragment transactionsFragment;
     private BalanceFragment measuresFragment;
     private SettingsFragment settingsFragment;
+    private SupportFragment supportFragment;
+    private AboutFragment aboutFragment;
 
     public static Main2Activity getMyMain2(){
         if(myMain2==null){
@@ -43,6 +47,8 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         transactionsFragment = new TransactionsFragment();
         measuresFragment = new BalanceFragment();
         settingsFragment = new SettingsFragment();
+        supportFragment = new SupportFragment();
+        aboutFragment = new AboutFragment();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -85,7 +91,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            //TODO
+            setFragment(3);
             return true;
         }
 
@@ -106,9 +112,9 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         } else if (id == R.id.nav_settings) {
             setFragment(3);
         } else if (id == R.id.nav_support) {
-            //TODO
+            setFragment(4);
         } else if (id == R.id.nav_about){
-            //TODO
+            setFragment(5);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -141,6 +147,18 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment, settingsFragment);
+                fragmentTransaction.commit();
+                break;
+            case 4:
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, supportFragment);
+                fragmentTransaction.commit();
+                break;
+            case 5:
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, aboutFragment);
                 fragmentTransaction.commit();
                 break;
         }

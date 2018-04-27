@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="25dp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/txt_Support"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/support_txt"
+        android:textSize="17sp"
+        android:layout_marginBottom="50dp" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="@string/email"/>
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:inputType="textMultiLine"
+        android:gravity="top|start"
+        android:maxLines="10"
+        android:scrollbars="vertical"
+        android:background="@drawable/border_support"
+        android:hint="@string/edt_feedback"/>
+
+    <Button
+        android:id="@+id/btn_feedback"
+        android:textAllCaps="false"
+        android:text="@string/btn_feedback" />
+</TableLayout>

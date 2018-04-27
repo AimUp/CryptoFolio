@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Cryptofolio</string>
     <string name="about">Acerca de</string>
     <string name="chart">grafico</string>
     <string name="home">Inicio</string>
-    <string name="my_coins">Mis monedas</string>
+    <string name="quantity">Cantidad</string>
+    <string name="paid">Pagado(USD)</string>
+    <string name="transactions">Transacciones</string>
+    <string name="balance">Balance</string>
+    <string name="settings">Ajustes</string>
+    <string name="support">Ayuda</string>
+    <string name="support_txt">Si tienes alguna duda o sugerencia puedes enviarla a través del formulario.</string>
+    <string name="edt_feedback">Escribe tu problema/sugerencia</string>
+    <string name="btn_feedback">Enviar</string>
 </resources>
