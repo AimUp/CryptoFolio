@@ -14,11 +14,6 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //FONT OF THE SPLASH TEXT
-        /*TextView t = (TextView) findViewById(R.id.splashtitle);
-        Typeface tf = Typeface.createFromAsset(getAssets(), "DitR.ttf");
-        t.setTypeface(tf);*/
-
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
