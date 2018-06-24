@@ -34,4 +34,5 @@
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="title_activity_main2" translatable="false">Main2Activity</string>
     <string name="title_activity_swimpe_frames" translatable="false">swimpeFrames</string>
+    <string name="github">github</string>
 </resources>

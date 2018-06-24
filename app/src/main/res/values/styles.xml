@@ -10,6 +10,7 @@
 
     <style name="GeneralTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:textColor">@color/white</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="tabTrasparent" parent="Theme.AppCompat.NoActionBar">

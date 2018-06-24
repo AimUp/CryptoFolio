@@ -15,109 +15,132 @@
             android:id="@+id/containerCoins"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TableLayout
-                android:layout_width="wrap_content"
-                android:layout_height="20dp">
-                <TableRow
-                    android:gravity="center">
-                    <TextView
-                        android:gravity="center_vertical|center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textStyle="bold"
-                        android:text="BTC"
-                        android:id="@+id/textView" />
-                    <Switch
-                        android:id="@+id/homeSwitch"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginRight="1dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:textOff="ETH"
-                        android:textOn="BTC"
-
-                        android:thumbTint="@color/white"/>
-                    <TextView
-                        android:gravity="center_vertical|center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textStyle="bold"
-                        android:text="ETH"
-                        android:layout_below="@+id/textView" />
-                </TableRow>
-            </TableLayout>
-
-            <com.db.chart.view.LineChartView
-                android:id="@+id/linechartBTC"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@android:drawable/dialog_holo_dark_frame"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"/>
+                android:layout_height="wrap_content"
+                android:padding="20dp">
+                <TableLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp">
+                    <TableRow
+                        android:gravity="center">
+                        <TextView
+                            android:gravity="center_vertical|center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textStyle="bold"
+                            android:text="BTC"
+                            android:id="@+id/textView" />
+                        <Switch
+                            android:id="@+id/homeSwitch"
+                            android:layout_marginLeft="1dp"
+                            android:layout_marginRight="1dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:textOff="ETH"
+                            android:textOn="BTC"
 
-            <com.db.chart.view.LineChartView
-                android:id="@+id/linechartETH"
+                            android:thumbTint="@color/white"/>
+                        <TextView
+                            android:gravity="center_vertical|center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textStyle="bold"
+                            android:text="ETH"
+                            android:layout_below="@+id/textView" />
+                    </TableRow>
+                </TableLayout>
+
+                <com.db.chart.view.LineChartView
+                    android:id="@+id/linechartBTC"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"/>
+
+                <com.db.chart.view.LineChartView
+                    android:id="@+id/linechartETH"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:visibility="gone"/>
+                android:padding="10dp"
+                android:background="@android:drawable/dialog_holo_light_frame">
+                <TextView
+                    android:id="@+id/Bitcoin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bitcoin"
+                    android:textAllCaps="true"
+                    android:textSize="10pt"
+                    android:textColor="@color/backgroundDark"/>
+                <TextView
+                    android:id="@+id/btcPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_0"
+                    android:textAlignment="center"
+                    android:textColor="@color/backgroundDark"
+                    android:textSize="15pt" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/Bitcoin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/bitcoin"
-                android:textAlignment="center"
-                android:textSize="15pt" />
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:background="@android:drawable/dialog_holo_light_frame">
+                <TextView
+                    android:id="@+id/Ethereum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ethereum"
+                    android:textAllCaps="true"
+                    android:textSize="10pt"
+                    android:textColor="@color/backgroundDark"/>
+                <TextView
+                    android:id="@+id/ethPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_0"
+                    android:textAlignment="center"
+                    android:textColor="@color/backgroundDark"
+                    android:textSize="15pt" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/btcPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_0"
-                android:textAlignment="center"
-                android:textSize="15pt" />
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="3dp"
-                android:background="@color/separator" />
-
-            <TextView
-                android:id="@+id/Ethereum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ethereum"
-                android:textAlignment="center"
-                android:textSize="15pt" />
-
-            <TextView
-                android:id="@+id/ethPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_0"
-                android:textAlignment="center"
-                android:textSize="15pt" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="3dp"
-                android:background="@color/separator" />
-
-            <TextView
-                android:id="@+id/Litecoin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/litecoin"
-                android:textAlignment="center"
-                android:textSize="15pt" />
-
-            <TextView
-                android:id="@+id/ltcPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_0"
-                android:textAlignment="center"
-                android:textSize="15pt" />
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:background="@android:drawable/dialog_holo_light_frame">
+                <TextView
+                    android:id="@+id/Litecoin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/litecoin"
+                    android:textAllCaps="true"
+                    android:textSize="10pt"
+                    android:textColor="@color/backgroundDark"/>
+                <TextView
+                    android:id="@+id/ltcPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_0"
+                    android:textAlignment="center"
+                    android:textSize="15pt"
+                    android:textColor="@color/backgroundDark"/>
+            </LinearLayout>
         </TableLayout>
 
         <android.support.design.widget.FloatingActionButton
